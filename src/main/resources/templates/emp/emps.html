@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>员工管理</title>
+<link th:href="@{/css/form.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/button.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<section ><a th:href="@{/user/logout}">注销</a>&nbsp;&nbsp;您现在的位置：<a th:href="@{/toMain}">首页</a>&gt;&gt;人员管理</section>
+<table class="altrowstable" id="alternatecolor" style="margin:auto" >
+<caption>员工信息记录表</caption>
+	<form >
+	<tr>
+		<th>员工编号</th>
+		<th>员工姓名</th>
+		<th>员工年龄</th>
+		<th>员工性别</th>
+		<th>员工电话</th>
+		<th>员工部门</th>
+		<th>员工工资</th>
+		<th>入职时间</th>
+		<th>签到</th>
+		<th>签到时间</th>
+		<th>操作</th>
+	</tr>
+	<!--<c:forEach items="${sessionScope.employees}" var="emp">-->
+		<tr th:each="emp : ${emps}">
+			<td th:text="${emp.id}"></td>
+			<td th:text="${emp.name}"></td>
+			<td th:text="${emp.age}"></td>
+			<td th:text="${emp.sex}"></td>
+			<td th:text="${emp.phone}"></td>
+			<td th:text="${emp.dept}"></td>
+			<td th:text="${emp.salary}"></td>
+			<td th:text="${emp.joinDate}"></td>
+			<td th:text="${emp.signIn}"></td>
+			<td th:text="${emp.signTime}"></td>
+			<td>
+				<a th:href="@{/emp/delete(id=${emp.id})}" onclick="javascript:return todel()">删除</a>
+				<a th:href="@{/emp/toEmpUpdate(id=${emp.id})}">修改</a>
+			</td>
+		</tr>
+	<!--</c:forEach>-->
+	</form>
+</table>
+<div class="demo_con" >
+<form th:action="@{/emp/toAdd}" method="post">
+<button type="submit" class="button blue rarrow" >添加员工</button><br>
+</form>
+<form th:action="@{/emp/resetSign}" method="post">
+<button type="submit" class="button blue rarrow" >重置签到信息</button><br>
+</form>
+<form th:action="@{/toMain}" method="post">
+<button type="submit" class="button blue larrow" >返回首页</button><br>
+</form>
+</div>
+
+<script type="text/javascript" >
+	function todel() {
+		var msg = "确定要删除吗？\n\n请确认！";
+		if (confirm(msg)==true){
+			return true;
+		}else{
+			return false;
+		}
+	}
+</script>
+</body>
+</html>

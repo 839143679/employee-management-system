@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>员工管理系统</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+<section ><a th:href="@{/user/logout}">注销</a>&nbsp;&nbsp;您现在的位置：首页&gt;&gt;<a th:href="@{/toMain}">员工信息管理</a></section>
+<section class="demo">
+    <div class="container">
+    <p th:each="cookie : ${#httpServletRequest.getCookies()}"
+       th:if="${cookie.getName().equals('loginName')}"
+       th:text="'你好,管理员 ' + ${cookie.getValue()}"/>
+    </div>
+    <div class="demo_con">
+        <table>
+            <tr>
+        <form th:action="@{/emp/sign}" method="post">
+        <button type="submit" class="button blue">打卡</button>
+        </form>
+
+        <form th:action="@{/emp/toupdate}" method="post">
+            <button type="submit" class="button blue" >修改个人信息</button>
+        </form>
+
+        <form th:action="@{/emp/queryAllEmps}" method="post">
+        <button type="submit" class="button blue">查看员工信息</button>
+        </form>
+            </tr>
+            <tr>
+        <form th:action="@{/user/toUpdatePwd}" method="post">
+        <button type="submit" class="button blue">修改密码</button>
+        </form>
+
+        <form th:action="@{/emp/toNotice}">
+        <button type="submit" class="button blue">通知</button>
+        </form>
+
+        <form th:action="@{/user/logout}">
+        <button type="submit" class="button blue" >退出</button>
+        </form>
+            </tr>
+        </table>
+    </div>
+</section>
+</body>
+</html>

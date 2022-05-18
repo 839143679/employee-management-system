@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修改密码</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+<style type="text/css">
+    body,td,th { font-family: "Source Sans Pro", sans-serif; }
+    body { background-color: #2B2B2B; }
+</style>
+</head>
+<body>
+
+
+<div class="wrapper">
+
+    <div class="container" th:each="emp : ${updateEmp}">
+        <h1>修改密码</h1>
+        <form class="form" th:action="@{/user/update}" method="post" th:object="${emp}">
+            <input type="text" placeholder="用户名" name="username" th:value="${emp.username}" id="username_text">
+            <input type="password" placeholder="密码" th:value="${emp.password}" name="password">
+            <button type="submit" id="update-button">修改</button>
+        </form>
+        <form th:action="@{/toMain}" method="post">
+            <button type="submit" >返回</button>
+        </form>
+    </div>
+
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+
+</div>
+
+<script type="text/javascript" src="/static/js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#update-button").click(function () {
+
+            //验证密码,必须由字母,数字下划线组成,并且长度5-12位
+            //获取用户名输入框内容
+            let passwordText = $("#password").val();
+            let passwordRege = /^\w{5,12}$/;
+            //使用test验证
+            if (!passwordRege.test(passwordText)) {
+                //提示用户结果
+                $("span.errorMsg").text("密码不合法");
+                return false;
+            }
+        })
+    });
+    $("#username_text").click(function () {
+        $("#username_text").setAttribute("readonly","readonly");
+
+    })
+</script>
+
+</body>
+

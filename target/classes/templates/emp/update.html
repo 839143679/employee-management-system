@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>修改信息</title>
+<!--<link th:href="@{../../static/css/button.css}" rel="stylesheet" type="text/css">
+<link th:href="@{../../static/css/form.css}" rel="stylesheet" type="text/css">-->
+<style type="text/css">
+		body{
+			background: #f5faff;
+		}
+		a{
+			text-decoration: none;
+			color: black;
+		}
+		a:hover {color:red}
+		input, textarea {
+			padding: 9px;
+			border: solid 1px #E5E5E5;
+			outline: 0;
+			font: normal 13px/100% Verdana, Tahoma, sans-serif;
+			width: 200px;
+			background: #FFFFFF url('/static/images/login2.jpg') left top repeat-x;
+			background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+			background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+			box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+			-moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+			-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+		}
+
+		textarea {
+			width: 400px;
+			max-width: 400px;
+			height: 150px;
+			line-height: 150%;
+		}
+
+		input:hover, textarea:hover,
+		input:focus, textarea:focus {
+			border-color: #C9C9C9;
+			-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+		}
+
+		.form label {
+			/*text-align: left;*/
+			margin-left: 10px;
+			color: #999999;
+			font-size: large;
+		}
+
+		.submit input {
+			width: auto;
+			padding: 9px 15px;
+			background: #617798;
+			border: 0;
+			font-size: 14px;
+			color: #FFFFFF;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+		}
+		#form{
+			width: 500px;
+			padding: 20px;
+			position: relative;
+			left: 50%;
+			top: 50%;
+			margin-left: -260px;
+			margin-top: 50px;
+			background: rgba(255,255,255,0.2);
+			box-shadow: 0 2px 2px rgba(0.1,0.1,0.1,0.7);
+			border-radius: 10px;
+			text-align: center;
+		}
+
+		.radio {
+
+			display: inline-block;
+			height: 12px;
+			width: 12px;
+		}
+
+
+		body{
+			background: #f5faff;
+		}
+		a{
+			text-decoration: none;
+			color: black;
+		}
+		a:hover {color:red}
+		.demo_con{
+			width: 960px;
+			margin:40px auto 0;
+		}
+		.button:nth-child(6n){
+			margin-right: 0;
+		}
+		.button{
+			width: 140px;
+			line-height: 38px;
+			text-align: center;
+			font-weight: bold;
+			color: #fff;
+			text-shadow:1px 1px 1px #333;
+			border-radius: 5px;
+			margin:0 20px 20px 0;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.button.blue {
+			border: 1px solid #1e7db9;
+			box-shadow: 0 1px 2px #8fcaee inset, 0 -1px 0 #497897 inset, 0 -2px 3px #8fcaee inset;
+			background: -webkit-linear-gradient(top, #42a4e0, #2e88c0);
+			background: -moz-linear-gradient(top, #42a4e0, #2e88c0);
+			background: linear-gradient(top, #42a4e0, #2e88c0);
+		}
+		.button.rarrow,
+		.button.larrow {
+			overflow: visible;
+		}
+
+		.rarrow:after,
+		.rarrow:before,
+		.larrow:after,
+		.larrow:before {
+			position: absolute;
+			content: "";
+			display: block;
+			width: 28px;
+			height: 28px;
+			-webkit-transform: rotate(45deg);
+			-moz-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+
+		.rarrow:before {
+			width: 27px;
+			height: 27px;
+			top: 6px;
+			right: -13px;
+			clip: rect(auto auto 26px 2px);
+		}
+
+		.rarrow:after {
+			top: 6px;
+			right: -12px;
+			clip: rect(auto auto 26px 2px);
+		}
+		.blue.rarrow:before {
+			background: #1E7DB9;
+		}
+
+		.blue.rarrow:after {
+			box-shadow: 0 1px 0 #8FCAEE inset, -1px 0 0 #497897 inset, -2px 0 0 #8FCAEE inset;
+			background: -webkit-linear-gradient(top left, #42A4E0, #2E88C0);
+			background: -moz-linear-gradient(top left, #42A4E0, #2E88C0);
+			background: linear-gradient(top left, #42A4E0, #2E88C0);
+		}
+
+		.larrow:before {
+			top: 6px;
+			left: -13px;
+			width: 27px;
+			height: 27px;
+			clip: rect(2px 26px auto auto);
+		}
+
+		.larrow:after {
+			top: 6px;
+			left: -12px;
+			clip: rect(2px 26px auto auto);
+		}
+		.blue.larrow:before {
+			background: #1E7DB9;
+		}
+
+		.blue.larrow:after {
+			box-shadow: 0 -1px 0 #497897 inset, 0 -2px 0 #8FCAEE inset, 1px 0 0 #8FCAEE inset;
+			background: -webkit-linear-gradient(top left, #42A4E0, #2E88C0);
+			background: -moz-linear-gradient(top left, #42A4E0, #2E88C0);
+			background: linear-gradient(top left, #42A4E0, #2E88C0);
+		}
+		.blue:hover {
+			background: -webkit-linear-gradient(top, #70bfef, #4097ce);
+			background: -moz-linear-gradient(top, #70bfef, #4097ce);
+			background: linear-gradient(top, #70bfef, #4097ce);
+		}
+		.blue:active {
+			top: 1px;
+			box-shadow: 0 1px 3px #114566 inset, 0 3px 0 #fff;
+			background: -webkit-linear-gradient(top, #1a71a8, #1976b1);
+			background: -moz-linear-gradient(top, #1a71a8, #1976b1);
+			background: linear-gradient(top, #1a71a8, #1976b1);
+		}
+		.blue.rarrow:hover:after,
+		.blue.larrow:hover:after {
+			background: -webkit-linear-gradient(top left, #70bfef, #4097ce);
+			background: -moz-linear-gradient(top left, #70bfef, #4097ce);
+			background: linear-gradient(top left, #70bfef, #4097ce);
+		}
+		.blue.rarrow:active:after,
+		.blue.larrow:active:after {
+			background: -webkit-linear-gradient(top left, #1a71a8, #1976b1);
+			background: -moz-linear-gradient(top left, #1a71a8, #1976b1);
+			background: linear-gradient(top left, #1a71a8, #1976b1);
+		}
+		.blue.rarrow:active:after {
+			box-shadow: 0 1px 0 #114566 inset, -1px 0 0 #114566 inset;
+		}
+
+		.blue.larrow:active:after {
+			box-shadow: 0 -1px 0 #114566 inset, 1px 0 0 #114566 inset;
+		}
+	</style>
+</head>
+<body>
+<section><a th:href="@{/user/logout}">注销</a>&nbsp;&nbsp;您现在的位置：<a th:href="@{/toMain}">首页</a>>&gt;<a>修改个人信息</a></section>
+<div id="form" style=" height: 500px; margin-top: 70px;">
+<form th:action="@{/emp/empUpdate}" th:each=" employee : ${updateEmp}" method="post" th:object="${emp}">
+
+	<p><label>员工编号</label><input type="text" name="id" th:value="${employee.id}" readonly/></p>
+	<p><label>姓名</label><input type="text" name="name" th:value="${employee.name}"/></p>
+	<p><label>年龄</label><input type="text" name="age" th:value="${employee.age}"/></p>
+	<p><label>性别</label><input type="text" name="sex" th:value="${employee.sex}"/></p>
+	<p><label>电话</label><input type="text" name="phone" th:value="${employee.phone}"/></p>
+	<p><label>部门</label><input type="text" name="dept" th:value="${employee.dept}"/></p>
+	<p><label>工资</label><input type="text" name="salary" th:value="${employee.salary}"/></p>
+	<p><label>入职时间</label><input type="text" name="joindate" th:value="${employee.joinDate}" readonly/></p>
+	<input type="hidden" name="method" value="update"/>
+<p class="submit"><input type="submit"class="bluebuttoncss" value="修改"/></p>
+</form>
+</div>
+<div class="demo_con">
+<form th:action="@{/toMain}" method="post">
+<button type="submit" class="button blue larrow" >返回首页</button>
+</form>
+</div>
+</body>
+</html>
